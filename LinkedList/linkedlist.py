@@ -19,14 +19,6 @@ class LinkedList:
         for n in self:			# We are now using our own __iter__ generator/method/function
             ans += n.data
         return ans
-        """ 
-        n = self.head
-        ans = 0
-        while n != None:
-            ans = ans + n.data
-            n = n.next
-        return sum
-        """
 
     # Add items to the back of the list.
     # O(1)
@@ -45,9 +37,18 @@ class LinkedList:
     # O(1)
     def remove_first(self):
         temp = self.head
-        self.head = self.head.next      # move the head to the new head.
-        self.head.previous = None       # remove the link between head and the new first element.
-        temp.next = None                # remove the last reference from the temp element, so that it is "flowing" freely in the eather.
+        
+        if self.count_of_nodes == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next      # move the head to the new head.
+            self.head.previous = None       # remove the link between head and the new first element.
+            temp.next = None                # remove the last reference from the temp element, so that it is "flowing" freely in the eather.
+
+        self.count_of_nodes -= 1
+        if self.count_of_nodes < 0:
+            self.count_of_nodes == 0
         return temp                     # return the element that we removed.
 
     # removes the last element/node from the linked list.
@@ -55,9 +56,18 @@ class LinkedList:
     # O(1)
     def remove_last(self):
         temp = self.tail
-        self.tail = self.tail.previous  # move the tail to the new tail
-        self.tail.next = None
-        temp.previous = None
+        
+        if self.count_of_nodes == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.previous  # move the tail to the new tail
+            self.tail.next = None
+            temp.previous = None
+
+        self.count_of_nodes -= 1
+        if self.count_of_nodes < 0:
+            self.count_of_nodes == 0
         return temp
     
     # Generates a string representation of the linked list when print(LinkedList)
